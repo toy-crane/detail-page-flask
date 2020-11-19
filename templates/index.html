@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>이미지 상세 페이지 테스트</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#posts-box").html("");
+                $.ajax({
+                type: "GET",
+                url: "/posts",
+                data: {},
+                success: function (response) {
+                    console.log(response)
+                    let posts = response['posts']
+                    for(let i = 0; i < posts.length; i++){
+                        let post = posts[i];
+                        let {_id, title} = post;
+                        let tempHtml = `<li>
+                                            <a href="/posts/${_id}">${title}</a>
+                                        </li>`
+                        $('#posts-box').append(tempHtml)
+                    }
+
+                }
+            })
+            });
+
+        </script>
+    </head>
+    <body>
+        <ul id="posts-box">
+            <li>
+                <a href="/posts/1">1번 글</a>
+            </li>
+            <li>
+                <a href="/posts/2">2번 글</a>
+            </li>
+            <li>
+                <a href="/posts/3">3번 글</a>
+            </li>
+        </ul>
+    </body>
+</html>
